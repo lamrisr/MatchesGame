@@ -22,9 +22,11 @@ export class GameComponent implements OnInit {
   }
 
   onChoiceDone(choice) {
-    this.matchesCount -= choice;
+    if(choice > 0 && choice < 4) {
+      this.matchesCount -= choice;
     if(this.matchesCount > 0) this.giveHand();
     if(this.turn === TURNS.COMPUTER) this.makeAChoice();
+    }
   }
 
   replay() {
@@ -46,11 +48,9 @@ export class GameComponent implements OnInit {
 
   private makeAChoice() {
     let modulo = this.matchesCount % 4;
-    console.log("modulo "+modulo);
     let matchesToPick = 0;
     if(modulo === 0) matchesToPick = 3;
     else if(modulo <= 3) matchesToPick = modulo;
-    console.log("qdqd "+matchesToPick);
     this.matchesCount -= matchesToPick;
     if(this.matchesCount > 0) this.giveHand();
   }
