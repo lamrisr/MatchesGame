@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row justify-content-center mt-3">
+    Allumettes restantes : {{matchesCount}}
+  </div>
+  <ng-template [ngIf]="matchesCount > 0">
+    <div class="row justify-content-center mt-3">
+      <span *ngFor="let i of [].constructor(matchesCount)">
+        <img src="/assets/matchStick.png"/>
+      </span>
+    </div>
+    <div class="row justify-content-center mt-3" *ngIf="turn === 0">
+      Combien d'allumettes aimeriez-vous prendre ?
+      <div class="btn-group mr-2" role="group" aria-label="choices-group">
+        <button type="button" class="btn btn-primary" (click)='onChoiceDone(1)'>1</button>
+        <button type="button" *ngIf="matchesCount > 1" class="btn btn-primary" (click)='onChoiceDone(2)'>2</button>
+        <button type="button" *ngIf="matchesCount > 2" class="btn btn-primary" (click)='onChoiceDone(3)'>3</button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="matchesCount === 0">
+    <div class="row justify-content-center mt-3" *ngIf="turn === 0">
+      Félicitations ! Vous avez gagné !
+    </div>
+    <div class="row justify-content-center mt-3" *ngIf="turn === 1">
+      Vous avez perdu !
+    </div>
+    <div class="row justify-content-center mt-3">
+      <button (click)="replay()" class="btn btn-primary">Rejouer</button>
+    </div>
+  </ng-template>
+</div>
